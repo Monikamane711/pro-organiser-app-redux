@@ -1,0 +1,5 @@
+export const SET_COLUMN = "ADD_COLUMN";
+export const COLUMN_KEY = "COLUMN_KEY";
+export const DELETE_COLUMN = "DELETE_COLUMN";
+export const GET_BOARD_COLUMN_DATA = "GET_BOARD_COLUMN_DATA";
+export const UNSET_COLUMN = "UNSET_COLUMN";

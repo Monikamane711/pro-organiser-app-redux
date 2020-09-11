@@ -1,0 +1,5 @@
+export const GET_DATA = "GET_DATA";
+export const SELECTED_BOARD_KEY = "SELECTED_BOARD_KEY";
+export const SELECTED_BOARD_VALUES = "SELECTED_BOARD_VALUES";
+export const LOADER = "LOADER";
+export const DELETE_BOARD = "DELETE_BOARD";

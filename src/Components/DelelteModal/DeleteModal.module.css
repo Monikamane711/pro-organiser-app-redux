@@ -1,0 +1,84 @@
+.modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 320px;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 10px #818080;
+          box-shadow: 0px 0px 10px #818080;
+  border-radius: 15px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(156, 156, 156, 0.9);
+}
+
+.text {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.buttons .delete {
+  width: 65px;
+  height: 35px;
+  padding: 5px;
+  text-align: center;
+  margin: 0 10px;
+  background-color: rgba(109, 252, 140, 0);
+  border-radius: 5px;
+  color: red;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-shadow: 0 0 5px #d6d5d5;
+          box-shadow: 0 0 5px #d6d5d5;
+  padding-top: 7px;
+  text-align: center;
+  border: none;
+}
+
+.buttons .delete:hover {
+  background-color: rgba(243, 113, 113, 0.842);
+  color: white;
+}
+
+.buttons .cancel {
+  width: 65px;
+  height: 35px;
+  padding: 5px;
+  text-align: center;
+  margin: 0 10px;
+  background-color: rgba(109, 252, 140, 0);
+  border-radius: 5px;
+  color: #585858;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-shadow: 0 0 5px #d6d5d5;
+          box-shadow: 0 0 5px #d6d5d5;
+  padding-top: 7px;
+  text-align: center;
+  border: none;
+}
+
+.buttons .cancel:hover {
+  background-color: rgba(153, 153, 153, 0.829);
+  color: white;
+}
+/*# sourceMappingURL=DeleteModal.module.css.map */

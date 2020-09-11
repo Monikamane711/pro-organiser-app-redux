@@ -1,0 +1,9 @@
+export const SET_CARD = "SET_CARD";
+export const VIEW_CARD = "VIEW_CARD";
+export const CARD_KEY = "CARD_KEY";
+export const DELETE_CARD = "DELETE_CARD";
+export const EDIT_CARD = "EDIT_CARD";
+export const DRAG_DROP = "DRAG_DROP";
+export const CLOSE_VIEW_CARD = "CLOSE_VIEW_CARD";
+export const UNSET_CARD = "UNSET_CARD";
+export const CLOSE_EDIT_CARD = "CLOSE_EDIT_CARD";

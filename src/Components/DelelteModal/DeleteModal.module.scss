@@ -1,0 +1,67 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 320px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgb(129, 128, 128);
+  border-radius: 15px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(156, 156, 156, 0.9);
+}
+.text {
+  margin: 0 auto;
+  text-align: center;
+}
+.buttons {
+  .delete {
+    width: 65px;
+    height: 35px;
+    padding: 5px;
+    text-align: center;
+    margin: 0 10px;
+    background-color: rgba(109, 252, 140, 0);
+    border-radius: 5px;
+    color: rgb(250, 1, 1);
+    box-shadow: none;
+    box-shadow: 0 0 5px rgb(214, 213, 213);
+    padding-top: 7px;
+    text-align: center;
+
+    border: none;
+  }
+  .delete:hover {
+    background-color: rgba(243, 113, 113, 0.842);
+    color: white;
+  }
+  .cancel {
+    width: 65px;
+    height: 35px;
+    padding: 5px;
+    text-align: center;
+    margin: 0 10px;
+    background-color: rgba(109, 252, 140, 0);
+    border-radius: 5px;
+    color: rgb(88, 88, 88);
+    box-shadow: none;
+    box-shadow: 0 0 5px rgb(214, 213, 213);
+    padding-top: 7px;
+    text-align: center;
+
+    border: none;
+  }
+  .cancel:hover {
+    background-color: rgba(153, 153, 153, 0.829);
+    color: white;
+  }
+}

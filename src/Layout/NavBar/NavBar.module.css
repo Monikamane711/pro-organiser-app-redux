@@ -1,0 +1,20 @@
+.home,.login,.signup,.createBoard {
+  color: #ffffff;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.signup {
+  margin-right: 0px;
+}
+
+.home:hover,.createBoard:hover,.login:hover,.signup:hover {
+  color: #f6f8fc;
+  text-decoration: underline;
+ 
+}
+
+.navbar {
+  background-color: #2f51a0;
+  width: 100%;
+}
