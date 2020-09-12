@@ -58,9 +58,10 @@ const CreateBoardForm = () => {
               Name of Board
             </Label>
             <Input
+             id="name"
               type="text"
               name="nameofBoard"
-              id="name"
+             
               placeholder=""
               onBlur={formik.handleBlur}
               value={formik.values.nameofBoard}
