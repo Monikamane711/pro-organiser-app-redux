@@ -291,7 +291,7 @@ const AddCardForm = ({
           <Label className={styles.label}>Due Date</Label>
           <Input
             type="date"
-            id="dueDate"
+            id="due_date"
             name="dueDate"
             onBlur={formik.handleBlur}
             value={formik.values.dueDate}
