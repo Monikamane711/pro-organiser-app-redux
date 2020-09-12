@@ -57,7 +57,7 @@ const CreateBoardForm = () => {
             <Label htmlFor="hname" className={styles.label}>
               Name of Board
             </Label>
-            <Input
+            <input
              id="name"
               type="text"
               name="nameofBoard"
@@ -66,7 +66,7 @@ const CreateBoardForm = () => {
               onBlur={formik.handleBlur}
               value={formik.values.nameofBoard}
               onChange={formik.handleChange}
-            ></Input>
+            />
             {formik.errors.nameofBoard && formik.touched.nameofBoard ? (
               <div className={styles.error}>{formik.errors.nameofBoard}</div>
             ) : null}
