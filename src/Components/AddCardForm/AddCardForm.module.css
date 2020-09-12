@@ -28,7 +28,7 @@
 .modal .head {
   text-align: center;
   font-size: 1.44rem;
-  color: #2f51a0;
+  color: #0bbb8f;
 }
 
 .modal .label {
@@ -51,7 +51,7 @@
 }
 
 .createButton {
-  background-color: #2f51a0;
+  background-color: #000080;
   color: #fdfdfd;
 }
 

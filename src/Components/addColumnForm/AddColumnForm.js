@@ -14,7 +14,6 @@ const AddColumnForm = ({
   unsetColumn,
   selectedBoardKey,
   deleteColumnDispatch,
-  uid,
 }) => {
   const [taskTitle, setTaskTitle] = useState("");
   const closeModal = () => {
@@ -25,7 +24,7 @@ const AddColumnForm = ({
     e.preventDefault();
     firebase
       .database()
-      .ref(`/users/${uid}/boards/${selectedBoardKey}/columns/${v4()}/`)
+      .ref(`/boards/${selectedBoardKey}/columns/${v4()}/`)
       .set({ taskTitle }, function (error) {
         if (error) {
           console.log(error);
@@ -82,7 +81,6 @@ const matchStateToProps = (state) => {
   return {
     selectedBoardKey: state.board.selectedBoardKey,
     setColumnState: state.column.setColumn,
-    uid: state.auth.uid,
   };
 };
 const matchDispatchToprops = (dispatch) => {

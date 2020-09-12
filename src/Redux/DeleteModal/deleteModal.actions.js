@@ -3,7 +3,6 @@ import {
   DELETE_COLUMN,
   DELETE_BOARD,
   DELETE_CARD,
-  LOGOUT_MODAL,
 } from "./DeleteModal.actionTypes";
 
 export const deleteModal = (value) => {
@@ -30,12 +29,5 @@ export const deleteColumn = (value) => {
 export const deleteBoard = () => {
   return {
     type: DELETE_BOARD,
-  };
-};
-
-export const logoutModal = (value) => {
-  return {
-    type: LOGOUT_MODAL,
-    payload: value,
   };
 };

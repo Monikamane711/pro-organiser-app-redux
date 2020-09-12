@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardTitle } from "reactstrap";
 import styles from "./Columns.module.css";
-import BoardCards from "../BoardCard_/BoardCards";
+import BoardCards from "../BoardCard/BoardCards";
 import { MdDelete } from "react-icons/md";
 import firebase from "firebase/app";
 import { connect } from "react-redux";
@@ -15,9 +15,12 @@ const Columns = ({
   selectedBoardKey,
   setdeleteColumn,
   deleteModal,
-  uid,
 }) => {
   const deleteColumn = (columnKey) => {
+    // firebase
+    //   .database()
+    //   .ref(`/boards/${selectedBoardKey}/columns/${columnKey}`)
+    //   .remove();
     deleteModal(true);
     setdeleteColumn(columnKey);
   };
@@ -37,15 +40,13 @@ const Columns = ({
       firebase
         .database()
         .ref(
-          `/users/${uid}/boards/${selectedBoardKey}/columns/${dragggedColumnKey}/cards/${id}`
+          `/boards/${selectedBoardKey}/columns/${dragggedColumnKey}/cards/${id}`
         )
         .remove();
 
       firebase
         .database()
-        .ref(
-          `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${id}`
-        )
+        .ref(`/boards/${selectedBoardKey}/columns/${columnKey}/cards/${id}`)
         .set(draggesCardData);
     }
   };
@@ -79,7 +80,6 @@ const matchStateToProps = (state) => {
     draggesCardData: state.card.draggesCardData,
     selectedBoardKey: state.board.selectedBoardKey,
     deleteColumnState: state.column.setDeleteColumn,
-    uid: state.auth.uid,
   };
 };
 const matchDispatchToprops = (dispatch) => {

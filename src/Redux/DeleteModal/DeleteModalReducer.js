@@ -3,7 +3,6 @@ import {
   DELETE_COLUMN,
   DELETE_BOARD,
   DELETE_CARD,
-  LOGOUT_MODAL,
 } from "./DeleteModal.actionTypes";
 
 const initialState = {
@@ -41,12 +40,6 @@ export const DeleteModalReducer = (state = initialState, action) => {
         ...state,
         type: "Board",
         delete: true,
-      };
-    case LOGOUT_MODAL:
-      return {
-        ...state,
-        type: "Logout",
-        delete: "true",
       };
     default:
       return state;

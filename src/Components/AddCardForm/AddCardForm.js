@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { closeViewCard, unsetCard, closeEditCard } from "../../Redux/Index";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import { toast } from "react-toastify";
 
 const AddCardForm = ({
   columnKey,
@@ -22,10 +22,10 @@ const AddCardForm = ({
   closeEditCard,
   selectedBoardValue,
   selectedBoardKey,
-  uid,
 }) => {
   const [members, setMembers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
+  const [membersTouched, setMembersTouched] = useState(false);
 
   const initialValues = {
     taskTitle: "",
@@ -95,6 +95,13 @@ const AddCardForm = ({
     return newArray;
   };
 
+  const viewToast = () => {
+    toast("Card Created!!", {
+      type: "success",
+      autoClose: false,
+      // onClose: () => history.push("/boards"),
+    });
+  };
   const handleSubmit = ({ taskTitle, description }) => {
     for (let i = 0; i < selectedMembers.length; i++) {
       console.log(selectedMembers[i].value);
@@ -111,7 +118,7 @@ const AddCardForm = ({
         firebase
           .database()
           .ref(
-            `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${setCardKey}`
+            `/boards/${selectedBoardKey}/columns/${columnKey}/cards/${setCardKey}`
           )
           .set({ members }, (error) => {
             if (error) {
@@ -120,6 +127,7 @@ const AddCardForm = ({
               formik.resetForm();
               setSelectedMembers([]);
               setMembers([]);
+              viewToast();
               console.log("success");
             }
           });
@@ -130,7 +138,7 @@ const AddCardForm = ({
         firebase
           .database()
           .ref(
-            `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${setCardKey}`
+            `/boards/${selectedBoardKey}/columns/${columnKey}/cards/${setCardKey}`
           )
           .update({ taskTitle, description, date }, (error) => {
             if (error) {
@@ -139,6 +147,8 @@ const AddCardForm = ({
               formik.resetForm();
               setSelectedMembers([]);
               setMembers([]);
+              viewToast();
+
               console.log("success");
             }
           });
@@ -151,9 +161,7 @@ const AddCardForm = ({
 
         firebase
           .database()
-          .ref(
-            `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${v4()}`
-          )
+          .ref(`/boards/${selectedBoardKey}/columns/${columnKey}/cards/${v4()}`)
           .set({ taskTitle, members, description, date }, (error) => {
             if (error) {
               console.log(error);
@@ -161,6 +169,8 @@ const AddCardForm = ({
               formik.resetForm();
               setSelectedMembers([]);
               setMembers([]);
+              viewToast();
+
               console.log("success");
             }
           });
@@ -171,15 +181,13 @@ const AddCardForm = ({
 
     console.log("editcardFalse");
   };
-  console.log(formik.values.dueDate);
 
   useEffect(() => {
     if (editCard === true && setCard === false) {
       formik.values.taskTitle = setCardValue.taskTitle;
       formik.values.description = setCardValue.description;
       setMembers(setCardValue.members);
-      formik.values.dueDate = setCardValue.date;
-      console.log(formik.values.dueDate);
+      formik.values.dueDate = setCardValue.dueDate;
     }
   }, [
     setCardValue,
@@ -240,8 +248,10 @@ const AddCardForm = ({
           <Input
             type="select"
             id="exampleSelect"
+            // onChange={(e) => handleChangeMembers(e.target.selectedOptions)}
             name="members"
             onChange={(e) => handleChangeMembers(e.target.selectedOptions)}
+            onClick={(e) => setMembersTouched(true)}
             multiple
             required
           >
@@ -271,6 +281,9 @@ const AddCardForm = ({
                   }
                 )}
           </Input>
+          {selectedMembers.length === 0 && membersTouched ? (
+            <div className={styles.error}>Please Select atlest 1 member</div>
+          ) : null}
         </FormGroup>
         <FormGroup>
           <Label className={styles.label}>Type of Board</Label>
@@ -306,7 +319,7 @@ const AddCardForm = ({
           id="CreateCard"
           type="submit"
           className={styles.createButton}
-          disabled={!formik.isValid}
+          disabled={!(formik.isValid && selectedMembers.length !== 0)}
         >
           {editCard === true && setCard === false ? "Save Changes" : "Add Card"}
         </Button>
@@ -324,7 +337,6 @@ const matchStateToProps = (state) => {
     selectedBoardKey: state.board.selectedBoardKey,
     selectedBoardValue: state.board.selectedBoardValue,
     columnKey: state.card.columnKey,
-    uid: state.auth.uid,
   };
 };
 const matchDispatchToprops = (dispatch) => {

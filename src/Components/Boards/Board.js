@@ -1,19 +1,20 @@
 import React, { useEffect, Fragment, lazy, Suspense } from "react";
 import { Card, CardTitle, Button } from "reactstrap";
 import styles from "./Board.module.css";
+
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import AddColumnForm from "../addColumnForm/AddColumnForm";
+
 import firebase from "firebase/app";
 import NavBar from "../../Layout/NavBar/NavBar";
 import { connect } from "react-redux";
-import DeleteModal from "../DelelteModal/DeleteModal";
 import {
   getColumnData,
   setColumn,
   deleteBoard,
   deleteModal,
 } from "../../Redux/Index";
-
+import DeleteModal from "../DelelteModal/DeleteModal";
 const Columns = lazy(() => import("../Columns/Columns"));
 
 const Board = ({
@@ -24,7 +25,6 @@ const Board = ({
   getColumnData,
   deleteModal,
   deleteBoard,
-  uid,
 }) => {
   const setModal = () => {
     setColumn(true);
@@ -33,11 +33,11 @@ const Board = ({
   useEffect(() => {
     firebase
       .database()
-      .ref(`/users/${uid}/boards/${selectedBoardKey}/columns/`)
+      .ref(`/boards/${selectedBoardKey}/columns/`)
       .on("value", (snapshot) => {
         getColumnData(snapshot.val());
       });
-  }, [getColumnData, selectedBoardKey, uid]);
+  }, [getColumnData, selectedBoardKey]);
 
   const deleteHandler = (e) => {
     e.preventDefault();
@@ -117,7 +117,6 @@ const matchStateToProps = (state) => {
     selectedBoardKey: state.board.selectedBoardKey,
     selectedBoardValue: state.board.selectedBoardValue,
     boardColumnsData: state.column.boardColumnsData,
-    uid: state.auth.uid,
   };
 };
 const matchDispatchToprops = (dispatch) => {

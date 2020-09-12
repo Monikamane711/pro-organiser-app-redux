@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Card, CardTitle } from "reactstrap";
 import styles from "./Card.module.css";
+
 import EditDeleteIcons from "../EditDeleteIcons/EditDeleteIcons";
 
 const Ccard = ({ cardKey, value, viewCard }) => {

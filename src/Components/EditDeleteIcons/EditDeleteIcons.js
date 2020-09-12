@@ -13,7 +13,6 @@ const EditDeleteIcons = ({
   selectedBoardKey,
   editCard,
   closeViewCard,
-  uid,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -27,9 +26,7 @@ const EditDeleteIcons = ({
     console.log("click");
     firebase
       .database()
-      .ref(
-        `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${cardKey}`
-      )
+      .ref(`/boards/${selectedBoardKey}/columns/${columnKey}/cards/${cardKey}`)
       .remove();
 
     closeViewCard();
@@ -53,7 +50,6 @@ const EditDeleteIcons = ({
 const matchStateToProps = (state) => {
   return {
     selectedBoardKey: state.board.selectedBoardKey,
-    uid: state.auth.uid,
   };
 };
 const matchDispatchToprops = (dispatch) => {

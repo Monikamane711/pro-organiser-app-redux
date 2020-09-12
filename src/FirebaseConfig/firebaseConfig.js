@@ -6,5 +6,5 @@ export const firebaseConfig = {
   storageBucket: "pro-organiser-app-redux-35410.appspot.com",
   messagingSenderId: "644894850660",
   appId: "1:644894850660:web:185050526dd0f2be31e971",
-  measurementId: "G-GMVFGV9VEJ"
+  measurementId: "G-GMVFGV9VEJ",
 };

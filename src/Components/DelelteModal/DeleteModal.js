@@ -5,10 +5,6 @@ import Modal from "react-modal";
 import { deleteModal } from "../../Redux/DeleteModal/deleteModal.actions";
 import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
-import {
-  isAuthenticated,
-  userDetails,
-} from "../../Redux/Authentication/AuthActions";
 
 function DeleteModal() {
   const history = useHistory();
@@ -18,7 +14,6 @@ function DeleteModal() {
   const cardKey = useSelector((state) => state.deleteModal.cardKey);
   const columnKey = useSelector((state) => state.deleteModal.columnKey);
   const selectedBoardKey = useSelector((state) => state.board.selectedBoardKey);
-  const uid = useSelector((state) => state.auth.uid);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -26,7 +21,7 @@ function DeleteModal() {
       firebase
         .database()
         .ref(
-          `/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}/cards/${cardKey}`
+          `/boards/${selectedBoardKey}/columns/${columnKey}/cards/${cardKey}`
         )
         .remove();
       console.log("card");
@@ -34,7 +29,7 @@ function DeleteModal() {
     } else if (type === "Column") {
       firebase
         .database()
-        .ref(`/users/${uid}/boards/${selectedBoardKey}/columns/${columnKey}`)
+        .ref(`/boards/${selectedBoardKey}/columns/${columnKey}`)
         .remove();
       console.log("column");
 
@@ -42,7 +37,7 @@ function DeleteModal() {
     } else if (type === "Board") {
       firebase
         .database()
-        .ref(`/users/${uid}/boards/${selectedBoardKey}/`)
+        .ref(`/boards/${selectedBoardKey}/`)
         .remove()
         .then(() => {
           console.log("deleted");
@@ -51,10 +46,6 @@ function DeleteModal() {
       console.log("board");
 
       dispatch(deleteModal(false));
-    } else if (type === "Logout") {
-      dispatch(isAuthenticated(false));
-      dispatch(userDetails(null, null, null));
-      history.replace("/home");
     }
   };
   const handleCancel = (e) => {
@@ -72,12 +63,12 @@ function DeleteModal() {
       >
         <div className={styles.text}>
           <h4>Delete {type} ?</h4>
-          <p>Are you sure?</p>
+          <p>Are you sure you want to delete ?</p>
         </div>
 
         <div className={styles.buttons}>
           <button className={styles.delete} onClick={(e) => handleDelete(e)}>
-            Yes
+            Delete
           </button>
           <button className={styles.cancel} onClick={(e) => handleCancel(e)}>
             cancel

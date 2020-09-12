@@ -37,7 +37,7 @@ const ViewCard = ({
         ></FaTimesCircle>
       </div>
       <div className={styles.headContainer}>
-        <p className={styles.head}>{setCardValue.taskTitle}</p>
+        <p className={styles.head}>Task</p>
         <p className={styles.date}>
           {" "}
           {setCardValue !== null ? setCardValue.date : null}

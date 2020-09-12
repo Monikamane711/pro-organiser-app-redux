@@ -1,21 +1,16 @@
 import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./HomePage.module.css";
+import firebase from "firebase";
 import { Button } from "reactstrap";
 import NavBar from "../../Layout/NavBar/NavBar";
 import Loader from "../../Components/Loader/Loader";
 import { connect } from "react-redux";
 import { selectedBoardKey, getData, setLoader } from "../../Redux/Index";
-import firebase from "firebase/app";
 
-const HomePage = ({
-  boards,
-  loader,
-  selectedBoardKey,
-  getData,
-  setLoader,
-  uid,
-}) => {
+const HomePage = ({ boards, loader, selectedBoardKey, getData, setLoader }) => {
+  // console.log(props);
+  // console.log(props.match.params);
   console.log(loader, boards);
   const history = useHistory();
   console.log(boards);
@@ -29,12 +24,11 @@ const HomePage = ({
 
   useEffect(() => {
     setLoader(true);
-    const boardsRef = firebase.database().ref(`/users/${uid}/boards/`);
+    const boardsRef = firebase.database().ref(`/boards`);
     boardsRef.on("value", (snapshot) => {
       getData(snapshot.val());
-      setLoader(false);
     });
-  }, [setLoader, getData, uid]);
+  }, [getData, setLoader]);
 
   if (loader === true) {
     return (
@@ -67,6 +61,9 @@ const HomePage = ({
               You haven't created any boards. Kindly click on the 'Create Board'
               button in the navigation bar to create a board.
             </p>
+            <Button className={styles.button} onClick={() => openCreateBoard()}>
+              Create Board
+            </Button>
           </>
         ) : null}
       </div>
@@ -78,7 +75,6 @@ const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
     loader: state.board.loader,
-    uid: state.auth.uid,
   };
 };
 

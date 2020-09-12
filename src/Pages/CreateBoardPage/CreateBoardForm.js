@@ -7,10 +7,9 @@ import NavBar from "../../Layout/NavBar/NavBar";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CreateBoardForm = () => {
-  let uid = useSelector((state) => state.auth.uid);
   let history = useHistory();
   const initialValues = {
     nameofBoard: "",
@@ -33,12 +32,16 @@ const CreateBoardForm = () => {
   const handleSubmit = (values) => {
     setData(values);
     formik.resetForm();
-    history.push(`/user/${uid}/boards`);
+    toast("Board Created!!", {
+      type: "success",
+      autoClose: false,
+      onClose: () => history.push("/boards"),
+    });
   };
   const setData = async ({ nameofBoard, teamMembers, typeOfBoard }) => {
     await firebase
       .database()
-      .ref(`/users/${uid}/boards/${v4()}/`)
+      .ref(`/boards/${v4()}/`)
       .set({ nameofBoard, teamMembers, typeOfBoard }, function (error) {
         if (error) {
           console.log(error);
@@ -54,19 +57,18 @@ const CreateBoardForm = () => {
         <p className={styles.head}> Create Your Board</p>
         <Form className={styles.form} onSubmit={formik.handleSubmit}>
           <FormGroup>
-            <Label htmlFor="hname" className={styles.label}>
+            <Label htmlFor="name" className={styles.label}>
               Name of Board
             </Label>
-            <input
-             id="name"
+            <Input
               type="text"
               name="nameofBoard"
-             
+              id="name"
               placeholder=""
               onBlur={formik.handleBlur}
               value={formik.values.nameofBoard}
               onChange={formik.handleChange}
-            />
+            ></Input>
             {formik.errors.nameofBoard && formik.touched.nameofBoard ? (
               <div className={styles.error}>{formik.errors.nameofBoard}</div>
             ) : null}
