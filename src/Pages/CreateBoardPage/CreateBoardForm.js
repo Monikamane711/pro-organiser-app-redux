@@ -54,7 +54,7 @@ const CreateBoardForm = () => {
         <p className={styles.head}> Create Your Board</p>
         <Form className={styles.form} onSubmit={formik.handleSubmit}>
           <FormGroup>
-            <Label htmlFor="name" className={styles.label}>
+            <Label htmlFor="hname" className={styles.label}>
               Name of Board
             </Label>
             <Input
